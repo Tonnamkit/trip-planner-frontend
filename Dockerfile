@@ -4,6 +4,8 @@ FROM node:20-alpine AS builder
 # Set the working directory
 WORKDIR /app
 
+RUN apk update
+
 # Copy package.json and package-lock.json (or yarn.lock)
 # and install dependencies
 COPY package.json /app/
