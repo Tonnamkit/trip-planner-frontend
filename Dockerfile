@@ -1,10 +1,10 @@
 # Stage 1: Build the React application
 FROM node:20-alpine AS builder
 
+RUN apk update && apk upgrade --no-cache
+
 # Set the working directory
 WORKDIR /app
-
-RUN apk update
 
 # Copy package.json and package-lock.json (or yarn.lock)
 # and install dependencies
@@ -28,6 +28,8 @@ RUN npm run build
 
 # Stage 2: Serve the application with Nginx
 FROM nginx:1.29-alpine AS production-stage
+
+RUN apk update && apk upgrade --no-cache
 
 # Remove the default Nginx configuration
 RUN rm -rf /etc/nginx/conf.d
